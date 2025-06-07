@@ -102,3 +102,16 @@ services:
       - /usr/app/node_modules
       - /usr/app/webapps/tenant/node_modules
       - /usr/app/webapps/tenant/.next
+  ###############################################################################
+  # Contractor frontend
+  ###############################################################################
+  contractor-frontend:
+    build:
+      context: .
+      dockerfile: webapps/contractor/dev.Dockerfile
+    volumes:
+      - ./webapps/commonui:/usr/app/webapps/commonui
+      - ./webapps/contractor:/usr/app/webapps/contractor
+      - /usr/app/node_modules
+      - /usr/app/webapps/contractor/node_modules
+      - /usr/app/webapps/contractor/.next
