@@ -122,3 +122,18 @@ services:
     #     tag: '{{.Name}}/{{.ID}}'
     # depends_on:
     #   - kibana
+  ###############################################################################
+  # Contractor frontend
+  ###############################################################################
+  contractor-frontend:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: webapps/contractor/Dockerfile
+    # logging:
+    #   driver: syslog
+    #   options:
+    #     syslog-address: 'udp://localhost:$LOGSTASH_UDP_PORT'
+    #     tag: '{{.Name}}/{{.ID}}'
+    # depends_on:
+    #   - kibana

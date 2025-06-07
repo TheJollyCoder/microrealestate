@@ -210,6 +210,32 @@ services:
       - net
     depends_on:
       - gateway
+  ##############################################################################
+  # Contractor frontend
+  ##############################################################################
+  contractor-frontend:
+    # base path cannot be set at runtime: https://github.com/vercel/next.js/discussions/41769
+    build:
+      args:
+        - CONTRACTOR_BASE_PATH=$CONTRACTOR_BASE_PATH
+    image: mre/contractor-frontend:latest
+    environment:
+      - BASE_PATH=$CONTRACTOR_BASE_PATH
+      - PORT=$CONTRACTOR_FRONTEND_PORT
+      - DOCKER_GATEWAY_URL=$DOCKER_GATEWAY_URL
+      - NEXT_PUBLIC_APP_NAME=$APP_NAME
+      - NEXT_PUBLIC_BASE_PATH=$CONTRACTOR_BASE_PATH
+      - NEXT_PUBLIC_DEMO_MODE=$DEMO_MODE
+      - NEXT_PUBLIC_NODE_ENV=$NODE_ENV
+      - NEXT_PUBLIC_GATEWAY_URL=$GATEWAY_URL
+    expose:
+      - '$CONTRACTOR_FRONTEND_PORT'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    networks:
+      - net
+    depends_on:
+      - gateway
 ###############################################################################
 # microservices network
 ###############################################################################
